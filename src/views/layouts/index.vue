@@ -7,7 +7,7 @@
 			</keep-alive>
 			<router-view v-else></router-view>
 		</div>
-		<div class="layout-footer fixIphonex">
+		<div class="layout-footer" v-if="$route.meta.showTab">
 			<!-- 这里@change默认绑定在了van-tabbar上，参考vue的$attr -->
 			<TabBar :tabbars="tabbars" :defaultActive="defaultActive" @change="handleChange" />
 		</div>

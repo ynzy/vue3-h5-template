@@ -23,14 +23,15 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'About',
 				component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/about/index.vue'),
 				meta: { title: '关于我', keepAlive: false, showTab: true }
+			},
+			{
+				path: '/rem',
+				name: 'Rem',
+				component: () => import(/* webpackChunkName: "about" */ '../views/Rem.vue')
 			}
 		]
 	},
-	{
-		path: '/rem',
-		name: 'Rem',
-		component: () => import(/* webpackChunkName: "about" */ '../views/Rem.vue')
-	},
+
 	{
 		path: '/scssConfig',
 		name: 'ScssConfig',

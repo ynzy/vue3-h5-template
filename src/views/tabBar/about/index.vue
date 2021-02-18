@@ -1,6 +1,7 @@
 <!-- about -->
 <template>
-	<div>about</div>
+	<router-link to="/rem">Rem</router-link> |
+	<router-link to="/scssConfig">scssConfig</router-link>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

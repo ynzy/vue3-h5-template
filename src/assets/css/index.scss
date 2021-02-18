@@ -27,3 +27,23 @@ body,
 		background: #ffffff;
 	}
 }
+
+/* 适配iphonex */
+
+@supports (bottom: env(safe-area-inset-bottom)) {
+	.app-container {
+		padding-bottom: calc(env(safe-area-inset-bottom) + 50px); // 这里是重点
+	}
+	.bottom-button-box {
+		bottom: env(safe-area-inset-bottom); // 这里是重点
+		&:after {
+			content: '';
+			height: env(safe-area-inset-bottom); // 这里是重点
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background-color: #fff;
+		}
+	}
+}
