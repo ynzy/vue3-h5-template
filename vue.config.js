@@ -53,6 +53,6 @@ module.exports = {
 	},
 	chainWebpack: config => {
 		// ts-import-plugin 配置
-		prodConfig.mergeConfig(config)
+		// prodConfig.mergeConfig(config)
 	}
 }
