@@ -1,4 +1,5 @@
 const path = require('path')
+const autoprefixer = require('autoprefixer')
 // const defaultSettings = require('./src/config/index.js')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
 console.log(defaultSettings)
@@ -33,5 +34,12 @@ module.exports = {
 		//       }
 		//   }
 		// }
+	},
+	css: {
+		loaderOptions: {
+			postcss: {
+				plugins: [autoprefixer()]
+			}
+		}
 	}
 }

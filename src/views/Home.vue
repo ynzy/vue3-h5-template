@@ -18,6 +18,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .block {
+	display: flex;
 	font-size: 12px;
 }
 </style>
