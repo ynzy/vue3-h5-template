@@ -14,7 +14,7 @@ const mergeConfig = config => {
 						tsImportPluginFactory({
 							libraryName: 'vant',
 							libraryDirectory: 'es',
-							style: true
+							style: name => `${name}/style/less`
 						})
 					]
 				}),

@@ -1,0 +1,27 @@
+@import './reset.scss';
+@import './variables.scss';
+@import './mixin.scss';
+
+html,
+body .app {
+	color: #333333;
+	font-family: Arial, Helvetica, 'STHeiti STXihei', 'Microsoft YaHei', Tohoma, sans-serif;
+	background-color: $background-color;
+}
+
+.app-container {
+	padding-bottom: 50px;
+}
+
+.fixIphonex {
+	padding-bottom: $safe-bottom !important;
+	&::after {
+		content: '';
+		position: fixed;
+		bottom: 0 !important;
+		left: 0;
+		height: calc(#{$safe-bottom} + 1px);
+		width: 100%;
+		background: #ffffff;
+	}
+}

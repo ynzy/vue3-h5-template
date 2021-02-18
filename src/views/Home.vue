@@ -1,14 +1,16 @@
 <template>
 	<div class="home">
 		<img alt="Vue logo" src="../assets/logo.png" />
-		<div class="block">23123</div>
+		<ul class="block">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
 		<van-button type="primary">主要按钮</van-button>
-		<van-button type="info">信息按钮</van-button>
+		<van-button type="success">成功按钮</van-button>
 		<van-button type="default">默认按钮</van-button>
 		<van-button type="warning">警告按钮</van-button>
 		<van-button type="danger">危险按钮</van-button>
-		<van-button plain type="primary">朴素按钮</van-button>
-		<van-button plain type="info">朴素按钮</van-button>
 	</div>
 </template>
 
@@ -25,7 +27,8 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .block {
-	display: flex;
-	font-size: 12px;
+	@include flexbox();
+	font-size: 20px;
+	color: $theme-color;
 }
 </style>

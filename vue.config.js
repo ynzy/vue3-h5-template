@@ -2,7 +2,7 @@ const path = require('path')
 
 const prodConfig = require('./prod.config')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
-console.log(defaultSettings)
+console.log(defaultSettings.titlecd)
 
 const resolve = dir => path.join(__dirname, dir)
 // page title
@@ -36,7 +36,20 @@ module.exports = {
 		// }
 	},
 	css: {
-		loaderOptions: {}
+		loaderOptions: {
+			// postcss: {
+			// 	plugins: [autoprefixer()]
+			// },
+			scss: {
+				// 向全局sass样式传入共享的全局变量, $src可以配置图片cdn前缀
+				// 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
+				prependData: `
+          @import "@/assets/css/mixin.scss";
+          @import "@/assets/css/variables.scss";
+					$cdn: "${defaultSettings.$cdn}";
+          `
+			}
+		}
 	},
 	chainWebpack: config => {
 		// ts-import-plugin 配置
