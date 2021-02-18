@@ -2,7 +2,7 @@ const path = require('path')
 
 const prodConfig = require('./prod.config')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
-console.log(defaultSettings.titlecd)
+console.log(defaultSettings.title)
 
 const resolve = dir => path.join(__dirname, dir)
 // page title

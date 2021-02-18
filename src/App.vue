@@ -1,8 +1,9 @@
 <template>
-	<div id="nav">
-		<router-link to="/">Home</router-link> |
-		<router-link to="/about">About</router-link>
-	</div>
+	<!-- <div id="app"> -->
+	<!-- <router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> | <router-link to="/rem">Rem</router-link> |
+		<router-link to="/scssConfig">scssConfig</router-link> -->
+	<!-- <router-view /> -->
+	<!-- </div> -->
 	<router-view />
 </template>
 <script lang="ts">

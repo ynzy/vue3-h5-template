@@ -3,7 +3,9 @@
 @import './mixin.scss';
 
 html,
-body .app {
+body,
+#app {
+	height: 100%;
 	color: #333333;
 	font-family: Arial, Helvetica, 'STHeiti STXihei', 'Microsoft YaHei', Tohoma, sans-serif;
 	background-color: $background-color;
