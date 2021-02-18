@@ -1,6 +1,6 @@
 const path = require('path')
-const autoprefixer = require('autoprefixer')
-// const defaultSettings = require('./src/config/index.js')
+
+const prodConfig = require('./prod.config')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
 console.log(defaultSettings)
 
@@ -36,10 +36,10 @@ module.exports = {
 		// }
 	},
 	css: {
-		loaderOptions: {
-			postcss: {
-				plugins: [autoprefixer()]
-			}
-		}
+		loaderOptions: {}
+	},
+	chainWebpack: config => {
+		// ts-import-plugin 配置
+		prodConfig.mergeConfig(config)
 	}
 }

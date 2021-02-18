@@ -259,7 +259,7 @@ import 'amfe-flexible'
 
 [▲ 回顶部](#top)
 
-### <span id="vant">✅ 自动添加浏览器前缀 </span>
+### <span id="vant">✅ 自动添加浏览器前缀 (有影响，废弃)</span>
 
 ```js
 yarn add autoprefixer --dev
@@ -304,7 +304,7 @@ yarn add postcss-loader autoprefixer@8.0.0 --dev
 面安装插件介绍：
 [ts-import-plugin](https://github.com/Brooooooklyn/ts-import-plugin)用于 TypeScript 的模块化导入插件
 
-`npm i -D ts-import-plugin` 然后在 vue.config.js 中加入
+`yarn add ts-import-plugin --dev` 然后在 vue.config.js 中加入
 
 ```js
 const merge = require('webpack-merge')
