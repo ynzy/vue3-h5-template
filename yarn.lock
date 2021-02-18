@@ -1738,6 +1738,11 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.npm.taobao.org/alphanum-sort/download/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
+amfe-flexible@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npm.taobao.org/amfe-flexible/download/amfe-flexible-2.2.1.tgz#353f00289e4d38ca88a21eb3854420308af0b559"
+  integrity sha1-NT8AKJ5NOMqIoh6zhUQgMIrwtVk=
+
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.npm.taobao.org/ansi-colors/download/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
@@ -6765,6 +6770,13 @@ postcss-ordered-values@^4.1.2:
     cssnano-util-get-arguments "^4.0.0"
     postcss "^7.0.0"
     postcss-value-parser "^3.0.0"
+
+postcss-pxtorem@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.npm.taobao.org/postcss-pxtorem/download/postcss-pxtorem-5.1.1.tgz#198a68c10f9ad2d42370ef66299d7b3168f8cffa"
+  integrity sha1-GYpowQ+a0tQjcO9mKZ17MWj4z/o=
+  dependencies:
+    postcss "^7.0.27"
 
 postcss-reduce-initial@^4.0.3:
   version "4.0.3"
