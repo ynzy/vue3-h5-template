@@ -815,7 +815,15 @@ service.interceptors.response.use(
 export default service
 ```
 
-- api 接口定义都在 api/\*.ts 文件中
+#### 接口管理
+
+在`src/api` 文件夹下统一管理接口
+
+- 你可以建立多个模块对接接口, 比如 `home.ts` 里是首页的接口这里讲解 `authController.ts`
+- `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
+- `method` 请求方法
+- `data` 请求参数 `qs.stringify(params)` 是对数据系列化操作
+- `loading` 默认 `false`,设置为 `true` 后，显示 loading ui 交互中有些接口需要让用户感知
 
 ```ts
 import request from '@/utils/request'
@@ -840,8 +848,9 @@ export const fetchUserInfo = () => {
 }
 ```
 
-- 调用接口
-  由于`awaitWrap`类型推导很麻烦，所以还是采用 try catch 来捕获错误，既能捕获接口错误，也能捕获业务逻辑错误
+#### 如何调用
+
+由于`awaitWrap`类型推导很麻烦，所以还是采用 try catch 来捕获错误，既能捕获接口错误，也能捕获业务逻辑错误
 
 ```js
 onMounted(async () => {
@@ -853,6 +862,8 @@ onMounted(async () => {
 	}
 })
 ```
+
+[▲ 回顶部](#top)
 
 ### <span id="vuex">✅ Vuex 状态管理</span>
 
@@ -984,3 +995,70 @@ export default defineComponent({
 [▲ 回顶部](#top)
 
 ### <span id="router">✅ Vue-router </span>
+
+本案例主要采用 `history` 模式，开发者根据需求修改 `mode` `base`
+
+前往:[vue.config.js 基础配置](#base)
+
+```ts
+import { createRouter, createWebHistory } from 'vue-router'
+import { constantRouterMap } from './router.config'
+
+const router = createRouter({
+	history: createWebHistory(process.env.BASE_URL),
+	// 在按下 后退/前进 按钮时，就会像浏览器的原生表现那样
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition
+		} else {
+			return { top: 0 }
+		}
+	},
+	routes: constantRouterMap
+})
+
+export default router
+```
+
+```ts
+import { RouteRecordRaw } from 'vue-router'
+
+export const constantRouterMap: Array<RouteRecordRaw> = [
+	{
+		path: '/',
+		name: 'Home',
+		component: () => import('@/views/layouts/index.vue'),
+		redirect: '/home',
+		meta: {
+			title: '首页',
+			keepAlive: false
+		},
+		children: [
+			{
+				path: '/home',
+				name: 'Home',
+				component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/home/index.vue'),
+				meta: { title: '首页', keepAlive: false, showTab: true }
+			},
+			{
+				path: '/demo',
+				name: 'Dome',
+				component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/dome/index.vue'),
+				meta: { title: '首页', keepAlive: false, showTab: true }
+			},
+			{
+				path: '/about',
+				name: 'About',
+				component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/about/index.vue'),
+				meta: { title: '关于我', keepAlive: false, showTab: true }
+			}
+		]
+	}
+]
+```
+
+更多:[Vue Router](https://next.router.vuejs.org/zh/index.html)
+
+[▲ 回顶部](#top)
+
+### <span id="base">✅ Webpack 4 vue.config.js 基础配置 </span>

@@ -1,47 +1,24 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-
-const routes: Array<RouteRecordRaw> = [
-	{
-		path: '/',
-		name: 'Home',
-		component: () => import('@/views/layouts/index.vue'),
-		redirect: '/home',
-		meta: {
-			title: '首页',
-			keepAlive: false
-		},
-		children: [
-			{
-				path: '/home',
-				name: 'Home',
-				component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/home/index.vue'),
-				meta: { title: '首页', keepAlive: false, showTab: true }
-			},
-			{
-				path: '/about',
-				name: 'About',
-				component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/about/index.vue'),
-				meta: { title: '关于我', keepAlive: false, showTab: true }
-			},
-			{
-				path: '/rem',
-				name: 'Rem',
-				component: () => import(/* webpackChunkName: "about" */ '../views/Rem.vue')
-			}
-		]
-	},
-
-	{
-		path: '/scssConfig',
-		name: 'ScssConfig',
-		component: () => import(/* webpackChunkName: "about" */ '../views/ScssConfig.vue')
-	}
-]
+import { createRouter, createWebHistory } from 'vue-router'
+import { constantRouterMap } from './router.config'
 
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
-	routes
+	// 在按下 后退/前进 按钮时，就会像浏览器的原生表现那样
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition
+		} else {
+			return { top: 0 }
+		}
+	},
+	routes: constantRouterMap
 })
+
+// 路由开始进入
+router.beforeEach((to, from, next) => {
+	next()
+})
+
+router.afterEach((to, from, next) => {})
 
 export default router
