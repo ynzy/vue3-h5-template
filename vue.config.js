@@ -23,6 +23,7 @@ module.exports = {
 			warnings: false,
 			errors: true
 		}
+		// before: require('./mock/index.js') //引入mock/index.js
 		// proxy: {
 		//   //配置跨域
 		//   '/api': {

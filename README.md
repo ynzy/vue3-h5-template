@@ -500,6 +500,8 @@ index.html 的 meta 指定了 viewport-fit=cover
 
 [▲ 回顶部](#top)
 
+### <span id="mock">✅ 使用 Mock 数据 </span>
+
 ### <span id="vuex">✅ Vuex 状态管理</span>
 
 ### <span id="axios">✅ Axios 封装及接口管理</span>

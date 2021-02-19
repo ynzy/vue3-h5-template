@@ -4,11 +4,23 @@
 	<router-link to="/scssConfig">scssConfig</router-link>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import axios from 'axios'
+import { defineComponent, onMounted } from 'vue'
 export default defineComponent({
 	name: 'about',
 	props: {},
-	setup() {}
+	setup() {
+		onMounted(() => {
+			axios
+				.get('/vue-h5/user/info')
+				.then(res => {
+					console.log(res)
+				})
+				.catch(err => {
+					console.error(err)
+				})
+		})
+	}
 })
 </script>
 <style lang="scss" scoped></style>
