@@ -59,7 +59,14 @@ module.exports = [
 		type: 'get',
 		response: config => {
 			const { token } = config.query
-			const info = users['admin-token']
+			const info = {
+				author: 'ynzy',
+				avatar: 'https://avatars.githubusercontent.com/u/39397772?s=60&v=4',
+				projectAddress: 'https://github.com/ynzy/vue3-ts-wx-h5-template',
+				demoUrl: 'https://vue3-ts-wx-h5-template.vercel.app/',
+				demoCodeUrl: 'https://files.catbox.moe/lxle3w.png'
+			}
+			// const info = users['admin-token']
 			// mock error
 			// if (!info) {
 			// 	return {

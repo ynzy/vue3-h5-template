@@ -1,26 +1,8 @@
-export interface IIndexState {
-	phone: string
-	sms: string
+import { IUserInfo } from '@/api/interface'
+
+/**
+ * 用户信息
+ */
+export interface IAuthState {
 	userInfo: IUserInfo
-}
-
-export interface IUserInfo {
-	communitylist: ICommunity[]
-	sessionId: string
-	userId: string | number
-}
-
-export interface ICommunity {
-	cityName: string
-	cityCode: string
-}
-
-export interface ALoginData {
-	appChannel: number
-	mobile: string
-	smsCode: string
-}
-
-export interface ACodeData {
-	phone: string
 }

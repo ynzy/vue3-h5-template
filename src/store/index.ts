@@ -1,25 +1,17 @@
 import { createStore } from 'vuex'
-import { IHomeState } from './modules/Home/interface'
-import { IIndexState } from './modules/Auth/interface'
-import home from './modules/Home'
+import getters from './getters'
+import { IAuthState } from './modules/Auth/interface'
 import auth from './modules/Auth'
 // 全局状态
 export interface IGlobalState {
-	home: IHomeState
-	auth: IIndexState
+	auth: IAuthState
 }
 
-export interface IResponseType<P = {}> {
-	code: number
-	msg: string
-	data: P
-}
-
-export default createStore({
-	mutations: {},
-	actions: {},
+const store = createStore<IGlobalState>({
+	getters,
 	modules: {
-		home,
 		auth
 	}
 })
+
+export default store

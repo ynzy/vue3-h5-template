@@ -856,4 +856,131 @@ onMounted(async () => {
 
 ### <span id="vuex">✅ Vuex 状态管理</span>
 
+目录结构
+
+```bash
+├── store
+│   ├── modules
+│   ├── |── Auth
+│   ├── ├── ├── index.ts
+│   ├── ├── ├── interface.ts
+│   ├── ├── └── types.ts
+│   ├── index.ts
+│   ├── getters.ts
+```
+
+类型定义
+
+- 模块类型
+
+interface.ts
+
+```ts
+import { IUserInfo } from '@/api/interface'
+
+/**
+ * 用户信息
+ */
+export interface IAuthState {
+	userInfo: IUserInfo
+}
+```
+
+index.ts
+
+```ts
+import { Module } from 'vuex'
+import { IGlobalState } from '@/store/index'
+import { IAuthState } from '@/store/modules/Auth/interface'
+import * as Types from '@/store/modules/Auth/types'
+
+const state: IAuthState = {
+	userInfo: {}
+}
+
+const login: Module<IAuthState, IGlobalState> = {
+	namespaced: true,
+	state,
+	mutations: {
+		[Types.SAVE_USER_INFO](state, data) {
+			state.userInfo = data
+		}
+	},
+	actions: {
+		async [Types.SAVE_USER_INFO]({ commit }, data) {
+			return commit(Types.SAVE_USER_INFO, data)
+		}
+	}
+}
+
+export default login
+```
+
+- 全局 store 类型
+
+将模块类型导入到 index.ts,定义全局类型
+
+```ts
+import { IAuthState } from './modules/Auth/interface'
+
+export interface IGlobalState {
+	auth: IAuthState
+}
+
+const store = createStore<IGlobalState>({
+	getters,
+	modules: {
+		auth
+	}
+})
+
+export default store
+```
+
+`main.ts` 引入
+
+```javascript
+import { createApp } from 'vue'
+import store from './store'
+
+const app = createApp(App)
+app.use(store)
+app.mount('#app')
+```
+
+使用
+
+```ts
+import { fetchUserInfo } from '@/api/authController.ts'
+import { useStore } from 'vuex'
+import * as Types from '@/store/modules/Auth/types'
+import { IGlobalState } from '@/store'
+
+export default defineComponent({
+	name: 'about',
+	props: {},
+	setup(props) {
+		const store = useStore<IGlobalState>()
+		const userInfo = computed(() => {
+			return store.state.auth.userInfo
+		})
+		onMounted(async () => {
+			try {
+				let res = await fetchUserInfo()
+				if (res.code !== 0) return new Error(res.msg)
+				// Action 通过 store.dispatch 方法触发
+				store.dispatch(`auth/${Types.SAVE_USER_INFO}`, res.data)
+			} catch (error) {
+				console.log(error)
+			}
+		})
+		return {
+			userInfo
+		}
+	}
+})
+```
+
+[▲ 回顶部](#top)
+
 ### <span id="router">✅ Vue-router </span>
