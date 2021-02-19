@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"amfe-flexible": "^2.2.1",
+		"axios": "^0.21.1",
 		"core-js": "^3.6.5",
 		"vant": "^3.0.6",
 		"vue": "^3.0.0",

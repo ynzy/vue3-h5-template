@@ -502,8 +502,6 @@ index.html 的 meta 指定了 viewport-fit=cover
 
 ### <span id="vuex">✅ Vuex 状态管理</span>
 
-### <span id="router">✅ Vue-router </span>
-
 ### <span id="axios">✅ Axios 封装及接口管理</span>
 
 `utils/request.js` 封装 axios ,开发者需要根据后台接口做修改。
@@ -511,3 +509,5 @@ index.html 的 meta 指定了 viewport-fit=cover
 - `service.interceptors.request.use` 里可以设置请求头，比如设置 `token`
 - `config.hideloading` 是在 api 文件夹下的接口参数里设置，下文会讲
 - `service.interceptors.response.use` 里可以对接口返回数据处理，比如 401 删除本地信息，重新登录
+
+### <span id="router">✅ Vue-router </span>
