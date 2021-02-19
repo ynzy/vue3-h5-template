@@ -1,3 +1,5 @@
+const Mock = require('mockjs')
+
 const tokens = {
 	admin: {
 		token: 'admin-token'
@@ -8,12 +10,16 @@ const tokens = {
 }
 
 const users = {
-	'admin-token': {
-		roles: ['admin'],
-		introduction: 'I am a super administrator',
-		avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-		name: 'Super Admin'
-	},
+	'admin-token': Mock.mock({
+		id: '@id',
+		username: '@cname()',
+		author: '@first',
+		date: '@date()',
+		avatar: "@image('200x200','red','#fff','avatar')",
+		description: '@paragraph()',
+		ip: '@ip()',
+		email: '@email()'
+	}),
 	'editor-token': {
 		roles: ['editor'],
 		introduction: 'I am an editor',
@@ -40,7 +46,7 @@ module.exports = [
 			// }
 
 			return {
-				code: 20000,
+				code: 0,
 				data: token,
 				msg: '登录成功'
 			}
@@ -63,7 +69,7 @@ module.exports = [
 			// }
 
 			return {
-				code: 20000,
+				code: 0,
 				data: info,
 				msg: '登录成功'
 			}

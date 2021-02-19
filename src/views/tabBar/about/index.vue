@@ -4,21 +4,23 @@
 	<router-link to="/scssConfig">scssConfig</router-link>
 </template>
 <script lang="ts">
-import axios from 'axios'
 import { defineComponent, onMounted } from 'vue'
+import { fetchUserInfo } from '@/api/authController.ts'
+interface IUserInfo {
+	avator: string
+}
+
 export default defineComponent({
 	name: 'about',
 	props: {},
 	setup() {
-		onMounted(() => {
-			axios
-				.get('/vue-h5/user/info')
-				.then(res => {
-					console.log(res)
-				})
-				.catch(err => {
-					console.error(err)
-				})
+		onMounted(async () => {
+			try {
+				let res = await fetchUserInfo()
+				console.log(res)
+			} catch (error) {
+				console.log(error)
+			}
 		})
 	}
 })

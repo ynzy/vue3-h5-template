@@ -502,6 +502,182 @@ index.html 的 meta 指定了 viewport-fit=cover
 
 ### <span id="mock">✅ 使用 Mock 数据 </span>
 
+mock 请求的封装采用的是 [vue-element-admin 的 mock 请求封装](https://panjiachen.github.io/vue-element-admin-site/zh/guide/essentials/mock-api.html#swagger)，直接拿来用就可以了
+
+- mock.js
+
+```js
+const Mock = require('mockjs')
+
+const user = require('./user')
+// const role = require('./role')
+// const article = require('./article')
+// const search = require('./remote-search')
+
+// const mocks = [...user, ...role, ...article, ...search]
+const mocks = [...user]
+// for front mock
+// please use it cautiously, it will redefine XMLHttpRequest,
+// which will cause many of your third-party libraries to be invalidated(like progress event).
+function mockXHR() {
+	// mock patch
+	// https://github.com/nuysoft/Mock/issues/300
+	Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
+	Mock.XHR.prototype.send = function() {
+		if (this.custom.xhr) {
+			this.custom.xhr.withCredentials = this.withCredentials || false
+
+			if (this.responseType) {
+				this.custom.xhr.responseType = this.responseType
+			}
+		}
+		this.proxy_send(...arguments)
+	}
+
+	function XHR2ExpressReqWrap(respond) {
+		return function(options) {
+			let result = null
+			if (respond instanceof Function) {
+				const { body, type, url } = options
+				// https://expressjs.com/en/4x/api.html#req
+				result = respond({
+					method: type,
+					body: JSON.parse(body),
+					query: url
+				})
+			} else {
+				result = respond
+			}
+			return Mock.mock(result)
+		}
+	}
+
+	for (const i of mocks) {
+		Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
+	}
+}
+
+module.exports = {
+	mocks,
+	mockXHR
+}
+```
+
+- user.js
+
+```js
+const tokens = {
+	admin: {
+		token: 'admin-token'
+	},
+	editor: {
+		token: 'editor-token'
+	}
+}
+
+const users = {
+	'admin-token': {
+		roles: ['admin'],
+		introduction: 'I am a super administrator',
+		avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+		name: 'Super Admin'
+	},
+	'editor-token': {
+		roles: ['editor'],
+		introduction: 'I am an editor',
+		avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+		name: 'Normal Editor'
+	}
+}
+
+module.exports = [
+	// user login
+	{
+		url: '/vue-h5/user/login',
+		type: 'post',
+		response: config => {
+			const { username } = config.body
+			const token = tokens[username]
+
+			// mock error
+			// if (!token) {
+			// 	return {
+			// 		code: 60204,
+			// 		message: 'Account and password are incorrect.'
+			// 	}
+			// }
+
+			return {
+				code: 20000,
+				data: token,
+				msg: '登录成功'
+			}
+		}
+	},
+
+	// get user info
+	{
+		url: '/vue-h5/user/info.*',
+		type: 'get',
+		response: config => {
+			const { token } = config.query
+			const info = users['admin-token']
+			// mock error
+			// if (!info) {
+			// 	return {
+			// 		code: 50008,
+			// 		message: 'Login failed, unable to get user details.'
+			// 	}
+			// }
+
+			return {
+				code: 20000,
+				data: info,
+				msg: '登录成功'
+			}
+		}
+	},
+
+	// user logout
+	{
+		url: '/vue-h5/user/logout',
+		type: 'post',
+		response: _ => {
+			return {
+				code: 20000,
+				data: 'success'
+			}
+		}
+	}
+]
+```
+
+- main.js
+  如果不需要使用，去除掉这段代码就可以了
+
+```js
+// 使用mock数据
+if (config.mock) {
+	const { mockXHR } = require('../mock')
+	mockXHR()
+}
+```
+
+- 接口请求
+
+```js
+onMounted(() => {
+	axios
+		.get('/vue-h5/user/info')
+		.then(res => {
+			console.log(res)
+		})
+		.catch(err => {
+			console.error(err)
+		})
+})
+```
+
 ### <span id="vuex">✅ Vuex 状态管理</span>
 
 ### <span id="axios">✅ Axios 封装及接口管理</span>
