@@ -25,6 +25,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 0,
     '@typescript-eslint/no-explicit-any': 0, // TODO
     '@typescript-eslint/consistent-type-assertions': 0,
+    '@typescript-eslint/no-unused-vars': 0,
     'typescript-eslint/no-unused-vars': 'off'
   }
 }

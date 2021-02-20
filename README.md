@@ -1565,6 +1565,57 @@ yarn add weixin-js-sdk
 - router.ts
 
 ```ts
+// 路由开始进入
+router.beforeEach((to, from, next) => {
+  //! 解决ios微信下，分享签名不成功的问题,将第一次的进入的url缓存起来。
+  if (window.entryUrl === undefined) {
+    window.entryUrl = location.href.split('#')[0]
+  }
+  next()
+})
+router.afterEach((to, from, next) => {
+  let url
+  if (phoneModel() === 'ios') {
+    url = window.entryUrl
+  } else {
+    url = window.location.href
+  }
+	// 保存url
+  store.commit('link/SET_INIT_LINK', url)
+})
+```
+
+store/Link
+```ts
+import { Module } from 'vuex'
+import { IGlobalState } from '@/store/index'
+import { ILinkState } from '@/store/modules/Link/interface'
+
+const state: ILinkState = {
+  initLink: ''
+}
+
+const login: Module<ILinkState, IGlobalState> = {
+  namespaced: true,
+  state,
+  mutations: {
+    ['SET_INIT_LINK'](state, data) {
+      console.log(data)
+      state.initLink = data
+    }
+  },
+  actions: {}
+}
+
+export default login
+```
+由于window没有entryUrl变量，需要声明文件进行声明
+
+typings.ts
+```ts
+declare interface Window {
+  entryUrl: any
+}
 ```
 
 创建 hooks 函数
