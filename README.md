@@ -1357,3 +1357,24 @@ module.exports = {
 ```
 
 [▲ 回顶部](#top)
+
+### <span id="vconsole">✅ vconsole 移动端调试 </span>
+
+参考地址：https://github.com/AlloyTeam/AlloyLever
+参考地址：https://www.cnblogs.com/liyinSakura/p/9883777.html
+
+```js
+import Vconsole from 'vconsole'
+const vConsole = new Vconsole()
+export default vConsole
+```
+
+- app.vue 中设置暗门，点击几次显示 vconsole
+  - 在 app.vue 中通过 limit 进行设置
+  - 开发测试环境点击一次就可显示
+  - 生产环境点击 10 次
+    <p>
+      <img src="./static/image/secret.png" width="256" style="display:inline;">
+    </p>
+
+[▲ 回顶部](#top)
