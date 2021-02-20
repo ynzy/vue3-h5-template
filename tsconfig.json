@@ -34,6 +34,8 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/assets/json/*.json",
+    "src/assets/css/*.scss"
   ]
 }

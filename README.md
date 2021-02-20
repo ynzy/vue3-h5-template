@@ -1586,31 +1586,94 @@ yarn add weixin-js-sdk
 
 ### <span id="pettier">✅ Eslint + Pettier 统一开发规范 </span>
 
+参考Typescript的[代码检查](https://ts.xcatliu.com/engineering/lint.html)
+
 VScode 安装 `eslint` `prettier` `vetur` 插件
 
 在文件 `.prettierrc` 里写 属于你的 pettier 规则
+或者`prettier.config.js`
 
-```bash
-{
-   "printWidth": 120,
-   "tabWidth": 2,
-   "singleQuote": true,
-   "trailingComma": "none",
-   "semi": false,
-   "wrap_line_length": 120,
-   "wrap_attributes": "auto",
-   "proseWrap": "always",
-   "arrowParens": "avoid",
-   "bracketSpacing": false,
-   "jsxBracketSameLine": true,
-   "useTabs": false,
-   "overrides": [{
-       "files": ".prettierrc",
-       "options": {
-           "parser": "json"
-       }
-   }]
+```js
+module.exports =  {
+  "wrap_line_length": 120,
+  "wrap_attributes": "auto",
+  "eslintIntegration":true,
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ],
+	// 一行最多 100 字符
+	printWidth: 100,
+	// 使用 4 个空格缩进
+	tabWidth: 2,
+	// 不使用缩进符，而使用空格
+	useTabs: false,
+	// 行尾需要有分号
+	semi: true,
+	// 使用单引号
+	singleQuote: true,
+	// 对象的 key 仅在必要时用引号
+	quoteProps: 'as-needed',
+	// jsx 不使用单引号，而使用双引号
+	jsxSingleQuote: false,
+	// 末尾不需要逗号
+	trailingComma: 'none',
+	// 大括号内的首尾需要空格
+	bracketSpacing: true,
+	// jsx 标签的反尖括号需要换行
+	jsxBracketSameLine: false,
+	// 箭头函数，只有一个参数的时候，也需要括号 avoid
+	arrowParens: 'always',
+	// 每个文件格式化的范围是文件的全部内容
+	rangeStart: 0,
+	rangeEnd: Infinity,
+	// 不需要写文件开头的 @prettier
+	requirePragma: false,
+	// 不需要自动在文件开头插入 @prettier
+	insertPragma: false,
+	// 使用默认的折行标准 always
+	proseWrap: 'preserve',
+	// 根据显示样式决定 html 要不要折行
+	htmlWhitespaceSensitivity: 'css',
+	// 换行符使用 lf auto
+	endOfLine: 'lf'
 }
+```
+.eslintrc.js 配置
+```js
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    node: true,
+    es6: true
+  },
+  extends: [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    '@vue/typescript/recommended',
+    '@vue/prettier',
+    '@vue/prettier/@typescript-eslint'
+  ],
+  parserOptions: {
+    ecmaVersion: 2020
+  },
+  rules: {
+    // 禁止使用 var
+    'no-var': 'error',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/interface-name-prefix': 0,
+    '@typescript-eslint/no-explicit-any': 0 // TODO
+  }
+};
+
 ```
 
 Vscode setting.json 设置
@@ -1623,6 +1686,9 @@ Vscode setting.json 设置
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[tavascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   // 保存时用eslint格式化
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
@@ -1633,7 +1699,21 @@ Vscode setting.json 设置
   "vetur.format.defaultFormatter.html": "none",
   // js/ts程序用eslint，防止vetur中的prettier与eslint格式化冲突
   "vetur.format.defaultFormatter.js": "none",
-  "vetur.format.defaultFormatter.ts": "none"
+  "vetur.format.defaultFormatter.ts": "none",
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "typescript",
+      "autoFix": true
+    }
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
 ```
 
