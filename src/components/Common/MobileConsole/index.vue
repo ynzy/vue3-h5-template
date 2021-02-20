@@ -1,7 +1,7 @@
 <!-- MobileConsole -->
 <template>
   <teleport to="#vconsole">
-    <div class="vc-tigger" @click="toggleVc"></div>
+    <div class="vc-tigger" @click="toggleVc">点我</div>
   </teleport>
 </template>
 <script lang="ts">
@@ -75,8 +75,12 @@ export default defineComponent({
   position: fixed;
   top: 0;
   left: 0;
-  width: 20px;
+  width: 30px;
   height: 20px;
-  background: red;
+  line-height: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  background: rgb(0, 195, 255);
 }
 </style>
