@@ -1,11 +1,12 @@
-const prodConfig = require('./prod.config');
-const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts');
-console.log(defaultSettings.title);
+const prodConfig = require('./prod.config')
+const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
+console.log(defaultSettings.title)
 // page title
-const name = defaultSettings.title || 'vue mobile template';
-const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV);
+const name = defaultSettings.title || 'vue mobile template'
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 module.exports = {
+  // lintOnSave: true, // lint检查
   lintOnSave: !IS_PROD, // lint检查
   publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
   // publicPath: '/app/', //署应用包时的基本 URL。  vue-router history模式使用
@@ -56,31 +57,31 @@ module.exports = {
     }
   },
   configureWebpack: (config) => {
-    config.name = name;
+    config.name = name
     // 生产环境配置
     if (IS_PROD) {
       config['performance'] = {
         //打包文件大小配置
         maxEntrypointSize: 10000000,
         maxAssetSize: 30000000
-      };
+      }
     }
   },
   chainWebpack: (config) => {
     // ts-import-plugin 配置
     // prodConfig.mergeConfig(config)
     // 别名
-    prodConfig.resolveAlias(config);
+    prodConfig.resolveAlias(config)
     // 生产环境
     config.when(IS_PROD, (config) => {
       // 单独打包第三方模块
-      prodConfig.optimization(config);
+      prodConfig.optimization(config)
       // 打包分析
       // prodConfig.webpackReport(config)
       // gZip压缩
       // prodConfig.assetsGzip(config)
       // 代码压缩
       // prodConfig.codeUglify(config)
-    });
+    })
   }
-};
+}
