@@ -34,9 +34,6 @@ module.exports = {
 	},
 	css: {
 		loaderOptions: {
-			// postcss: {
-			// 	plugins: [autoprefixer()]
-			// },
 			scss: {
 				// 向全局sass样式传入共享的全局变量, $src可以配置图片cdn前缀
 				// 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
@@ -47,6 +44,9 @@ module.exports = {
           `
 			}
 		}
+	},
+	configureWebpack: config => {
+		config.name = name
 	},
 	chainWebpack: config => {
 		// ts-import-plugin 配置
@@ -60,7 +60,7 @@ module.exports = {
 			// 打包分析
 			prodConfig.webpackReport(config)
 			// gZip压缩
-			prodConfig.assetsGzip(config)
+			// prodConfig.assetsGzip(config)
 			// 代码压缩
 			// prodConfig.codeUglify(config)
 		})
