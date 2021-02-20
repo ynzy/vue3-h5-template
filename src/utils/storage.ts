@@ -28,7 +28,7 @@ export const sessionStorage = {
 		window.sessionStorage.setItem(key, JSON.stringify(value))
 	},
 	//取出数据
-	get<T>(key: string): T | null {
+	get<T>(key: string) {
 		let value = window.sessionStorage.getItem(key)
 		if (value && value != 'undefined' && value != 'null') {
 			return JSON.parse(value)
