@@ -1062,3 +1062,126 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
 [▲ 回顶部](#top)
 
 ### <span id="base">✅ Webpack 4 vue.config.js 基础配置 </span>
+
+如果你的 `Vue Router` 模式是 hash
+
+```javascript
+publicPath: './',
+```
+
+如果你的 `Vue Router` 模式是 history 这里的 publicPath 和你的 `Vue Router` `base` **保持一直**
+
+```javascript
+publicPath: '/app/',
+```
+
+```javascript
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+
+module.exports = {
+	// publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
+	publicPath: '/app/', // 署应用包时的基本 URL。  vue-router history模式使用
+	outputDir: 'dist', //  生产环境构建文件的目录
+	assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
+	lintOnSave: !IS_PROD,
+	productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
+	devServer: {
+		port: 9020, // 端口号
+		open: false, // 启动后打开浏览器
+		overlay: {
+			//  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
+			warnings: false,
+			errors: true
+		}
+		// ...
+	}
+}
+```
+
+[▲ 回顶部](#top)
+
+### <span id="alias">✅ 配置 alias 别名 </span>
+
+```javascript
+const path = require('path')
+const resolve = dir => path.join(__dirname, dir)
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+
+module.exports = {
+	chainWebpack: config => {
+		// 添加别名
+		config.resolve.alias
+			.set('@', resolve('src'))
+			.set('assets', resolve('src/assets'))
+			.set('api', resolve('src/api'))
+			.set('views', resolve('src/views'))
+			.set('components', resolve('src/components'))
+	}
+}
+```
+
+[▲ 回顶部](#top)
+
+### <span id="proxy">✅ 配置 proxy 跨域 </span>
+
+如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释 并且配置相应参数
+
+<u>**!!!注意：你还需要将 `src/config/env.development.js` 里的 `baseApi` 设置成 '/'**</u>
+
+```javascript
+module.exports = {
+	devServer: {
+		// ....
+		proxy: {
+			//配置跨域
+			'/api': {
+				target: 'https://test.xxx.com', // 接口的域名
+				// ws: true, // 是否启用websockets
+				changOrigin: true, // 开启代理，在本地创建一个虚拟服务端
+				pathRewrite: {
+					'^/api': '/'
+				}
+			}
+		}
+	}
+}
+```
+
+使用 例如: `src/api/home.js`
+
+```javascript
+export function getUserInfo(params) {
+	return request({
+		url: '/api/userinfo',
+		method: 'post',
+		data: qs.stringify(params)
+	})
+}
+```
+
+[▲ 回顶部](#top)
+
+### <span id="bundle">✅ 配置 打包分析 </span>
+
+```javascript
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+module.exports = {
+	chainWebpack: config => {
+		// 打包分析
+		if (IS_PROD) {
+			config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
+				{
+					analyzerMode: 'static'
+				}
+			])
+		}
+	}
+}
+```
+
+```bash
+npm run build
+```
+
+[▲ 回顶部](#top)

@@ -1,16 +1,15 @@
-const path = require('path')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const prodConfig = require('./prod.config')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
 console.log(defaultSettings.title)
 
-const resolve = dir => path.join(__dirname, dir)
 // page title
 const name = defaultSettings.title || 'vue mobile template'
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 module.exports = {
-	lintOnSave: false,
+	lintOnSave: false, // lint检查
 	publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
 	outputDir: 'dist', //  生产环境构建文件的目录
 	assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
@@ -23,13 +22,12 @@ module.exports = {
 			warnings: false,
 			errors: true
 		}
-		// before: require('./mock/index.js') //引入mock/index.js
+		//配置跨域
 		// proxy: {
-		//   //配置跨域
 		//   '/api': {
 		//       target: "https://test.xxx.com",
-		//       // ws:true,
-		//       changOrigin:true,
+		//       // ws: true, // 是否启用websockets
+		//       changOrigin:true, // 开启代理，在本地创建一个虚拟服务端
 		//       pathRewrite:{
 		//           '^/api':'/'
 		//       }
@@ -55,5 +53,18 @@ module.exports = {
 	chainWebpack: config => {
 		// ts-import-plugin 配置
 		// prodConfig.mergeConfig(config)
+		// 别名
+		prodConfig.resolveAlias(config)
+
+		/**
+		 * 打包分析
+		 */
+		if (IS_PROD) {
+			config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
+				{
+					analyzerMode: 'static'
+				}
+			])
+		}
 	}
 }
