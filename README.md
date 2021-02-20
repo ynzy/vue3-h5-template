@@ -25,35 +25,35 @@
 > ├ └── variables.scss -- 全局变量  
 > ├ ├── components -- 封装的组件  
 > ├ ├── config -- 环境配置  
+> ├ ├── hooks -- vue3 Hooks
+> ├ ├── model -- 类型声明文件
 > ├ ├── const -- 放 vue 页面的配置常量  
-> ├ ├── filters -- 过滤器  
 > ├ ├── plugins -- 插件  
 > ├ └── route -- VUE 路由  
 > ├ ├── index -- 路由入口  
 > ├ └── router.config.js -- 路由表  
 > ├ ├── store -- VUEX  
-> ├ └── util -- 工具包  
-> ├ ├── request.js -- axios 封装  
-> ├ ├── vconsole.js -- 移动端调试插件
-> ├ ├── jsApiList.js -- 微信 JS 接口列表
-> ├ ├── wechatPlugin.js -- jssdk 插件配置
-> ├ ├── storage.js -- 本地存储封装
-> ├ └── util -- 工具包  
-> ├ └── views -- 业务上的 vue 页面  
+> ├ └── utils -- 工具包  
+> ├ ├── request.js -- axios 封装
+> ├ └── storage.js -- 本地存储封装
+> ├ ├── views -- 业务上的 vue 页面  
 > ├ ├── layouts -- 路由布局页面(是否缓存页面)
-> ├ └── home -- 公众号
+> ├ ├── tabBar -- 底部菜单页面
+> ├ └── orther -- 其他页面
 > ├ ├── App.vue -- 根组件  
-> ├ └── main.js -- 入口 js  
+> ├ └── main.ts -- 入口 ts  
+> ├ └── shims-axios.d.ts -- axios 声明文件  
+> ├ └── shims-vue.d.ts -- vue 组件声明文件
 > ├── .env.development -- 开发环境  
 > ├── .env.production -- 生产环境  
 > ├── .env.staging -- 测试环境  
-> ├── ..eslintrc.js -- ESLint 配置  
+> ├── .eslintrc.js -- ESLint 配置  
 > ├── .gitignore -- git 忽略  
 > ├── .postcssrc.js -- CSS 预处理配置(rem 适配)  
 > ├── babel.config.js -- barbel 配置入口  
 > ├── tsconfig.json -- vscode 路径引入配置
 > ├── package.json -- 依赖管理  
-> └── vue.config.js -- vue cli3 的 webpack 配置
+> └── vue.config.js -- vue cli4 的 webpack 配置
 
 ### 启动项目
 
@@ -1509,6 +1509,25 @@ Vue.use(WechatPlugin)
 created() {
   console.log(this.$wx)
 },
+```
+
+[▲ 回顶部](#top)
+
+### <span id="storage">✅ 本地存储 storage 封装 </span>
+
+案例在：dome/storage/index.vue 下
+
+引用：
+
+```js
+import { storage } from '@/utils/storage'
+```
+
+调用：
+
+```js
+storage.set('data', originalData.value)
+storageData.value = storage.get('data')
 ```
 
 [▲ 回顶部](#top)

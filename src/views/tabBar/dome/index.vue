@@ -1,6 +1,8 @@
 <!-- demo -->
 <template>
-	<div>demo</div>
+	<div>
+		<router-link to="/Storage">Storage封装使用</router-link>
+	</div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
