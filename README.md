@@ -1357,6 +1357,9 @@ module.exports = {
 
 ### <span id="gzip">✅ gzip 压缩</span>
 
+可能会报错，安装低版本
+参考地址[https://www.cnblogs.com/wuzhiquan/p/14179388.html](https://www.cnblogs.com/wuzhiquan/p/14179388.html)
+
 ```js
 // * 打包gzip
 const assetsGzip = config => {
@@ -1368,6 +1371,32 @@ const assetsGzip = config => {
 			threshold: 10240, // 只有大小大于该值的资源会被处理 10240
 			minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
 			deleteOriginalAssets: true // 删除原文件
+		}
+	])
+}
+```
+
+[▲ 回顶部](#top)
+
+### <span id="uglifyjs">✅ uglifyjs 压缩</span>
+
+需要注意，使用此插件，需要把 es6 代码转成 es5 代码，此项目没有使用
+
+```js
+// * 代码压缩
+const codeUglify = config => {
+	config.plugin('uglifyjs-webpack-plugin').use(require('uglifyjs-webpack-plugin'), [
+		{
+			uglifyOptions: {
+				//生产环境自动删除console
+				compress: {
+					drop_debugger: true,
+					drop_console: false,
+					pure_funcs: ['console.log']
+				}
+			},
+			sourceMap: false,
+			parallel: true
 		}
 	])
 }

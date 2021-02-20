@@ -53,11 +53,16 @@ module.exports = {
 		// prodConfig.mergeConfig(config)
 		// 别名
 		prodConfig.resolveAlias(config)
-		// 单独打包第三方模块
-		prodConfig.optimization(config)
-		// 打包分析
-		prodConfig.webpackReport(config)
-		// gZip压缩
-		prodConfig.assetsGzip(config)
+		// 生产环境
+		config.when(IS_PROD, config => {
+			// 单独打包第三方模块
+			prodConfig.optimization(config)
+			// 打包分析
+			prodConfig.webpackReport(config)
+			// gZip压缩
+			prodConfig.assetsGzip(config)
+			// 代码压缩
+			// prodConfig.codeUglify(config)
+		})
 	}
 }
