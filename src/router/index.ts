@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { constantRouterMap } from './router.config'
-
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
 	// 在按下 后退/前进 按钮时，就会像浏览器的原生表现那样
@@ -16,6 +16,7 @@ const router = createRouter({
 
 // 路由开始进入
 router.beforeEach((to, from, next) => {
+	useDocumentTitle(to.meta.title)
 	next()
 })
 

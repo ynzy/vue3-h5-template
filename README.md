@@ -1363,18 +1363,158 @@ module.exports = {
 参考地址：https://github.com/AlloyTeam/AlloyLever
 参考地址：https://www.cnblogs.com/liyinSakura/p/9883777.html
 
-```js
-import Vconsole from 'vconsole'
-const vConsole = new Vconsole()
-export default vConsole
+```ts
+<!-- MobileConsole -->
+<template>
+	<teleport to="#vconsole">
+		<div class="vc-tigger" @click="toggleVc"></div>
+	</teleport>
+</template>
+<script lang="ts">
+import { defineComponent, onUnmounted, reactive } from 'vue'
+import VConsole from 'vconsole'
+import config from '@/config'
+import { useDOMCreate } from '@/hooks/useDOMCreate'
+interface IState {
+	lastClickTime: number
+	count: number
+	limit: number
+	vConsole: any
+}
+export default defineComponent({
+	name: 'MobileConsole',
+	props: {},
+	setup() {
+		useDOMCreate('vconsole')
+		const state = reactive<IState>({
+			lastClickTime: 0,
+			count: 0,
+			limit: ['production', 'prod'].includes(config.env || '') ? 5 : 0,
+			vConsole: null
+		})
+		const hasClass = (obj: HTMLElement | null, cls: string) => {
+			return obj?.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
+		}
+		const addClass = (obj: HTMLElement | null, cls: string) => {
+			if (!hasClass(obj, cls)) obj?.classList.add(cls)
+		}
+		const removeClass = (obj: HTMLElement | null, cls: string) => {
+			if (hasClass(obj, cls)) {
+				obj?.classList.remove(cls)
+			}
+		}
+		const toggleClass = (obj: HTMLElement | null, cls: string) => {
+			if (hasClass(obj, cls)) {
+				removeClass(obj, cls)
+			} else {
+				addClass(obj, cls)
+			}
+		}
+		const toggleVc = () => {
+			const nowTime = new Date().getTime()
+			if (nowTime - state.lastClickTime < 3000) {
+				state.count++
+			} else {
+				state.count = 0
+			}
+			state.lastClickTime = nowTime
+			if (state.count >= state.limit) {
+				if (!state.vConsole) {
+					state.vConsole = new VConsole()
+				}
+				let vconDom = document.getElementById('__vconsole')
+				toggleClass(vconDom, 'vconsole_show')
+				state.count = 0
+			}
+		}
+		onUnmounted(() => {
+			state.vConsole = null
+		})
+		return {
+			toggleVc
+		}
+	}
+})
+</script>
+<style lang="scss" scoped>
+.vc-tigger {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	background: red;
+}
+</style>
+
 ```
 
-- app.vue 中设置暗门，点击几次显示 vconsole
+- 在组件中设置暗门，点击几次显示 vconsole
   - 在 app.vue 中通过 limit 进行设置
   - 开发测试环境点击一次就可显示
-  - 生产环境点击 10 次
-    <p>
-      <img src="./static/image/secret.png" width="256" style="display:inline;">
-    </p>
+  - 生产环境点击 5 次
+
+#### teleport
+
+官方文档:[https://v3.cn.vuejs.org/guide/teleport.html](https://v3.cn.vuejs.org/guide/teleport.html)
+
+以前的弹框之类的组件哪里引用，dom 元素就在哪里，它可以帮助我们把这些代码从组件代码中分离开，方便我们更好查看 dom 元素组成
+
+useDOMCreate 可以帮助我们便捷创建 dom 元素，这样就不需要在 index.html 去创建 teleport 需要的 dom 元素了
 
 [▲ 回顶部](#top)
+
+### <span id="dyntitle">✅ 动态设置 title </span>
+
+```js
+export const useDocumentTitle = (title: string) => {
+	document.title = title
+}
+```
+
+router/index.ts 使用
+
+```ts
+router.beforeEach((to, from, next) => {
+	useDocumentTitle(to.meta.title)
+	next()
+})
+```
+
+[▲ 回顶部](#top)
+
+### <span id="jssdk">✅ 配置 Jssdk </span>
+
+安装：
+
+```js
+yarn add weixin-js-sdk
+```
+
+引用：
+
+```js
+// util
+wechatPlugin.js // jssdk插件配置
+jsApiList.js // 微信JS接口列表
+// main.js
+// 全局注册微信js-sdk
+import WechatPlugin from '@/utils/wechatPlugin'
+Vue.use(WechatPlugin)
+```
+
+调用：
+
+```js
+created() {
+  console.log(this.$wx)
+},
+```
+
+[▲ 回顶部](#top)
+
+# 鸣谢 ​
+
+[vue-h5-template](https://github.com/sunniejs/vue-h5-template)
+[vue-cli4-config](https://github.com/staven630/vue-cli4-config)
+[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)

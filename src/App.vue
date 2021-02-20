@@ -8,7 +8,7 @@
 	<MobileConsole />
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, watch } from 'vue'
 import config from '@/config/index'
 import MobileConsole from '@/components/Common/MobileConsole/index.vue'
 export default defineComponent({
