@@ -259,49 +259,46 @@ import 'amfe-flexible'
 
 [▲ 回顶部](#top)
 
-### <span id="vant">✅ 自动添加浏览器前缀 (有影响，废弃)</span>
-
-```js
-yarn add autoprefixer --dev
-```
-
-vue.config.js 添加配置
-
-```js
-const autoprefixer = require('autoprefixer')
-
-css: {
-	loaderOptions: {
-		postcss: {
-			plugins: [autoprefixer()]
-		},
-	}
-},
-```
-
-报错：
-
-```js
-PostCSS plugin autoprefixer requires PostCSS 8
-```
-
-autoprefixer 版本过高,降低 autoprefixer 版本即可
-
-执行
-
-```js
-
-yarn add postcss-loader autoprefixer@8.0.0 --dev
-```
-
-[参考地址](https://blog.csdn.net/candyyii/article/details/109055180)
-
-[▲ 回顶部](#top)
-
 ### <span id="vant">✅ VantUI 组件按需加载 </span>
 
 项目采用[Vant 自动按需引入组件 (推荐)](https://youzan.github.io/vant/v3/#/zh-CN/quickstart)下
 面安装插件介绍：
+
+一般来说 ts 使用的是方案二，但是我在用的过程中有一些问题，所以采用了方案一
+
+方案一：
+
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一款 `babel` 插件，它会在编译过程中将
+`import` 的写法自动转换为按需引入的方式
+
+#### 安装插件
+
+```bash
+npm i babel-plugin-import -D
+```
+
+在`babel.config.js` 设置
+
+```javascript
+// 对于使用 babel7 的用户，可以在 babel.config.js 中配置
+const plugins = [
+	[
+		'import',
+		{
+			libraryName: 'vant',
+			libraryDirectory: 'es',
+			style: true
+		},
+		'vant'
+	]
+]
+module.exports = {
+	presets: [['@vue/cli-plugin-babel/preset', { useBuiltIns: 'usage', corejs: 3 }]],
+	plugins
+}
+```
+
+方案二：
 [ts-import-plugin](https://github.com/Brooooooklyn/ts-import-plugin)用于 TypeScript 的模块化导入插件
 
 `yarn add ts-import-plugin --dev` 然后在 vue.config.js 中加入
@@ -1353,6 +1350,26 @@ module.exports = {
 			config.optimization.runtimeChunk('single')
 		})
 	}
+}
+```
+
+[▲ 回顶部](#top)
+
+### <span id="gzip">✅ gzip 压缩</span>
+
+```js
+// * 打包gzip
+const assetsGzip = config => {
+	config.plugin('compression-webpack-plugin').use(require('compression-webpack-plugin'), [
+		{
+			filename: '[path].gz[query]',
+			algorithm: 'gzip',
+			test: /\.js$|\.html$|\.json$|\.css/,
+			threshold: 10240, // 只有大小大于该值的资源会被处理 10240
+			minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
+			deleteOriginalAssets: true // 删除原文件
+		}
+	])
 }
 ```
 

@@ -1,6 +1,7 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const tsImportPluginFactory = require('ts-import-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const resolve = dir => path.join(__dirname, dir)
 
@@ -82,8 +83,35 @@ const optimization = config => {
 	})
 }
 
+// * 打包分析
+const webpackReport = config => {
+	if (IS_PROD) {
+		config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
+			{
+				analyzerMode: 'static'
+			}
+		])
+	}
+}
+
+// * 打包gzip
+const assetsGzip = config => {
+	config.plugin('compression-webpack-plugin').use(require('compression-webpack-plugin'), [
+		{
+			filename: '[path].gz[query]',
+			algorithm: 'gzip',
+			test: /\.js$|\.html$|\.json$|\.css/,
+			threshold: 10240, // 只有大小大于该值的资源会被处理 10240
+			minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
+			deleteOriginalAssets: true // 删除原文件
+		}
+	])
+}
+
 module.exports = {
 	mergeConfig,
 	resolveAlias,
-	optimization
+	optimization,
+	webpackReport,
+	assetsGzip
 }

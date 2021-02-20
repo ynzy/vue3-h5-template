@@ -1,5 +1,3 @@
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-
 const prodConfig = require('./prod.config')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
 console.log(defaultSettings.title)
@@ -57,15 +55,9 @@ module.exports = {
 		prodConfig.resolveAlias(config)
 		// 单独打包第三方模块
 		prodConfig.optimization(config)
-		/**
-		 * 打包分析
-		 */
-		if (IS_PROD) {
-			config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
-				{
-					analyzerMode: 'static'
-				}
-			])
-		}
+		// 打包分析
+		prodConfig.webpackReport(config)
+		// gZip压缩
+		prodConfig.assetsGzip(config)
 	}
 }
