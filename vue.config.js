@@ -55,7 +55,8 @@ module.exports = {
 		// prodConfig.mergeConfig(config)
 		// 别名
 		prodConfig.resolveAlias(config)
-
+		// 单独打包第三方模块
+		prodConfig.optimization(config)
 		/**
 		 * 打包分析
 		 */
