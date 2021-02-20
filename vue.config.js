@@ -60,7 +60,7 @@ module.exports = {
 			// 打包分析
 			prodConfig.webpackReport(config)
 			// gZip压缩
-			// prodConfig.assetsGzip(config)
+			prodConfig.assetsGzip(config)
 			// 代码压缩
 			// prodConfig.codeUglify(config)
 		})
