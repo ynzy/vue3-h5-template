@@ -12,8 +12,8 @@ import { vantPlugins } from './plugins/vant'
 
 // 使用mock数据
 if (config.mock) {
-	const { mockXHR } = require('../mock')
-	mockXHR()
+  const { mockXHR } = require('../mock')
+  mockXHR()
 }
 
 const app = createApp(App)

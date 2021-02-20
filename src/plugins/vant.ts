@@ -4,9 +4,9 @@ import { Button, Cell, CellGroup, Icon, Tabbar, TabbarItem, Image as VanImage } 
 const plugins = [Button, Icon, Cell, CellGroup, Tabbar, TabbarItem, VanImage]
 
 export const vantPlugins = {
-	install: function(vm: VM) {
-		plugins.forEach(item => {
-			vm.component(item.name, item)
-		})
-	}
+  install: function(vm: VM) {
+    plugins.forEach(item => {
+      vm.component(item.name, item)
+    })
+  }
 }
