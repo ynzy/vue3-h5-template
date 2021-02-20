@@ -1,7 +1,6 @@
 const prodConfig = require('./prod.config')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
 console.log(defaultSettings.title)
-
 // page title
 const name = defaultSettings.title || 'vue mobile template'
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
@@ -9,7 +8,8 @@ const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 module.exports = {
 	lintOnSave: false, // lint检查
 	publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
-	outputDir: 'dist', //  生产环境构建文件的目录
+	// publicPath: '/app/', //署应用包时的基本 URL。  vue-router history模式使用
+	outputDir: process.env.OUTPUT_DIR, //  生产环境构建文件的目录
 	assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
 	productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
 	devServer: {
@@ -58,9 +58,9 @@ module.exports = {
 			// 单独打包第三方模块
 			prodConfig.optimization(config)
 			// 打包分析
-			prodConfig.webpackReport(config)
+			// prodConfig.webpackReport(config)
 			// gZip压缩
-			prodConfig.assetsGzip(config)
+			// prodConfig.assetsGzip(config)
 			// 代码压缩
 			// prodConfig.codeUglify(config)
 		})
