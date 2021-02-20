@@ -28,12 +28,12 @@
   </div>
 </template>
 <script lang="ts">
-import { storage, sessionStorage } from '@/utils/storage';
-import { Toast } from 'vant';
-import { defineComponent, ref } from 'vue';
+import { storage, sessionStorage } from '@/utils/storage'
+import { Toast } from 'vant'
+import { defineComponent, ref } from 'vue'
 interface IstorageData {
-  name: string;
-  age: number;
+  name: string
+  age: number
 }
 export default defineComponent({
   name: 'Storage',
@@ -42,33 +42,33 @@ export default defineComponent({
     const originalData = ref<IstorageData>({
       name: '张三',
       age: 14
-    });
-    const storageData = ref<IstorageData>();
-    const sessionStorageData = ref<IstorageData>();
+    })
+    const storageData = ref<IstorageData>()
+    const sessionStorageData = ref<IstorageData>()
     const saveStorage = (type: string) => {
       if (type === 'storage') {
-        storage.set('data', originalData.value);
+        storage.set('data', originalData.value)
       } else {
-        sessionStorage.set('data', originalData.value);
+        sessionStorage.set('data', originalData.value)
       }
-      Toast('存入成功');
-    };
+      Toast('存入成功')
+    }
     const getStorage = (type: string) => {
       if (type === 'storage') {
-        storageData.value = storage.get('data');
+        storageData.value = storage.get('data')
       } else {
-        sessionStorageData.value = sessionStorage.get('data');
+        sessionStorageData.value = sessionStorage.get('data')
       }
-    };
+    }
     return {
       originalData,
       storageData,
       sessionStorageData,
       saveStorage,
       getStorage
-    };
+    }
   }
-});
+})
 </script>
 <style lang="scss" scoped>
 .storage_container {
