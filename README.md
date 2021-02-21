@@ -1563,14 +1563,31 @@ yarn add weixin-js-sdk
 由于苹果浏览器只识别第一次进入的路由，所以需要先处理下配置使用的 url
 
 - router.ts
-
+此处的jssdk配置仅供演示，正常业务逻辑需要配合后端去写
 ```ts
+import { isWeChat } from '../utils/index'
+import { fetchWeChatAuth } from '@/api/WxController'
+import { getQueryParams, phoneModel } from '@/utils'
+import store from '@/store'
+
 // 路由开始进入
 router.beforeEach((to, from, next) => {
   //! 解决ios微信下，分享签名不成功的问题,将第一次的进入的url缓存起来。
   if (window.entryUrl === undefined) {
     window.entryUrl = location.href.split('#')[0]
   }
+	const { code } = getQueryParams<IQueryParams>()
+		// 微信浏览器内微信授权登陆
+		// && !store.state.auth.userInfo.name
+		if (isWeChat()) {
+			if (code) {
+				store.commit('auth/STE_ISAUTH', true)
+				store.commit('auth/STE_CODE', code)
+			}
+			if (!store.state.auth.isAuth) {
+				location.href = fetchWeChatAuth()
+			}
+		}
   next()
 })
 router.afterEach((to, from, next) => {
@@ -1620,13 +1637,9 @@ declare interface Window {
 
 创建 hooks 函数
 
-```ts
-```
+hooks/useWxJsSdk.ts
 
-引用：
-
-```ts
-```
+每个页面使用jssdk，都需要调用一次useWxJsSdk,然后再使用其他封装的函数
 
 调用：
 

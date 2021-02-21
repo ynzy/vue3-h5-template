@@ -34,12 +34,12 @@ router.beforeEach((to, from, next) => {
   // 微信浏览器内微信授权登陆
   // && !store.state.auth.userInfo.name
   if (isWeChat()) {
-    if (!store.state.auth.isAuth) {
-      location.href = fetchWeChatAuth()
-    }
     if (code) {
       store.commit('auth/STE_ISAUTH', true)
       store.commit('auth/STE_CODE', code)
+    }
+    if (!store.state.auth.isAuth) {
+      location.href = fetchWeChatAuth()
     }
   }
 

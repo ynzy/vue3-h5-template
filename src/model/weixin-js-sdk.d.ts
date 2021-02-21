@@ -3,6 +3,8 @@ declare namespace WeixinJsSdk {
    * Type definations
    ****************************************************************************/
   type JSApis =
+    | 'updateAppMessageShareData'
+    | 'updateTimelineShareData'
     | 'onMenuShareTimeline'
     | 'onMenuShareAppMessage'
     | 'onMenuShareQQ'
@@ -125,7 +127,7 @@ declare namespace WeixinJsSdk {
      */
     jsApiList: JSApis[]
     /* beta */
-    beta: boolean
+    beta?: boolean
     [x: string]: any
   }
 
@@ -168,13 +170,15 @@ declare namespace WeixinJsSdk {
      */
     jsApiList: JSApis[]
   }
-
-  interface OnMenuShareTimelineOptions extends MenuCallbacks {
+  interface ShareOptions {
     /**
      * 分享标题
      */
     title: string
-
+    /**
+     * 分享描述
+     */
+    desc?: string
     /**
      * 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
      */
@@ -185,7 +189,9 @@ declare namespace WeixinJsSdk {
      */
     imgUrl?: string
   }
-
+  interface OnMenuShareTimelineOptions extends MenuCallbacks, ShareOptions {}
+  interface UpdateAppMessageShareData extends MenuCallbacks, ShareOptions {}
+  interface UpdateTimelineShareData extends MenuCallbacks, ShareOptions {}
   interface OnMenuShareAppMessageOptions extends OnMenuShareTimelineOptions {
     /**
      * 分享描述
@@ -517,12 +523,21 @@ declare namespace WeixinJsSdk {
    ****************************************************************************/
 
   /**
-   * 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+   * 自定义“分享给朋友”及“分享到QQ”按钮的分享内容（1.4.0）
+   */
+  function updateAppMessageShareData(options: UpdateAppMessageShareData): void
+  /**
+   * 自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容（1.4.0）
+   */
+  function updateTimelineShareData(options: UpdateTimelineShareData): void
+  /**
+   * 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口（即将废弃）
+
    */
   function onMenuShareTimeline(options: OnMenuShareTimelineOptions): void
 
   /**
-   * 获取“分享给朋友”按钮点击状态及自定义分享内容接口
+   * 获取“分享给朋友”按钮点击状态及自定义分享内容接口（即将废弃）
    */
   function onMenuShareAppMessage(options: OnMenuShareAppMessageOptions): void
 
