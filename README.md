@@ -11,52 +11,6 @@
 `Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
 
 本示例 Node.js 12.14.0
-
-### 项目结构
-```js
-vue-h5-template -- UI 主目录  
-|-- public -- 静态资源  
-|--	|-- favicon.ico -- 图标  
-|--	|-- index.html -- 首页  
-|-- src -- 源码目录  
-|--	|-- api -- 后端交互的接口  
-|-- assets -- 静态资源目录
-|--	|-- css
-|--	|--	|-- index.scss -- 全局通用样式
-|--	|--	|-- mixin.scss -- 全局 mixin
-|--	|--	|-- variables.scss -- 全局变量  
-|--	components -- 封装的组件  
-|--	config -- 环境配置  
-|--	hooks -- vue3 Hooks
-|--	model -- 类型声明文件
-|--	const -- 放 vue 页面的配置常量  
-|--	plugins -- 插件  
-|--	route -- VUE 路由  
-|--	|-- index -- 路由入口  
-|--	|-- router.config.js -- 路由表  
-|--	store -- VUEX  
-|--	utils -- 工具包  
-|--	|--	request.js -- axios 封装
-|--	|--	storage.js -- 本地存储封装
-|-- views -- 业务上的 vue 页面  
-|--	|-- layouts -- 路由布局页面(是否缓存页面)
-|--	|-- tabBar -- 底部菜单页面
-|--	|-- orther -- 其他页面
-|--	App.vue -- 根组件  
-|--	main.ts -- 入口 ts  
-|--	shims-axios.d.ts -- axios 声明文件  
-|--	shims-vue.d.ts -- vue 组件声明文件
-|-- .env.development -- 开发环境  
-|-- .env.production -- 生产环境  
-|-- .env.staging -- 测试环境  
-|-- .eslintrc.js -- ESLint 配置  
-|-- .gitignore -- git 忽略  
-|-- .postcssrc.js -- CSS 预处理配置(rem 适配)  
-|-- babel.config.js -- barbel 配置入口  
-|-- tsconfig.json -- vscode 路径引入配置
-|-- package.json -- 依赖管理  
-|-- vue.config.js -- vue cli4 的 webpack 配置
-```
 ### 项目结构
 ```js
 vue-h5-template -- UI 主目录  
@@ -66,10 +20,10 @@ vue-h5-template -- UI 主目录
 ├── src -- 源码目录  
 ├ ├── api -- 后端交互的接口  
 ├ ├── assets -- 静态资源目录
-├ ├──├── css
-├ ├──├── index.scss -- 全局通用样式
-├ ├──├── mixin.scss -- 全局 mixin
-├ └──└── variables.scss -- 全局变量  
+├ ├──	├── css
+├ ├──	├── index.scss -- 全局通用样式
+├ ├──	├── mixin.scss -- 全局 mixin
+├ └──	└── variables.scss -- 全局变量  
 ├ ├── components -- 封装的组件  
 ├ ├── config -- 环境配置  
 ├ ├── hooks -- vue3 Hooks
@@ -77,16 +31,16 @@ vue-h5-template -- UI 主目录
 ├ ├── const -- 放 vue 页面的配置常量  
 ├ ├── plugins -- 插件  
 ├ ├── route -- VUE 路由  
-├ ├──├── index -- 路由入口  
-├ └──└── router.config.js -- 路由表  
+├ ├──	├── index -- 路由入口  
+├ └──	└── router.config.js -- 路由表  
 ├ ├── store -- VUEX  
 ├ └── utils -- 工具包  
-├ ├──├── request.js -- axios 封装
-├ └──└── storage.js -- 本地存储封装
+├ ├──	├── request.js -- axios 封装
+├ └──	└── storage.js -- 本地存储封装
 ├ ├── views -- 业务上的 vue 页面  
-├ ├──├── layouts -- 路由布局页面(是否缓存页面)
-├ ├──├── tabBar -- 底部菜单页面
-├ └──└── orther -- 其他页面
+├ ├──	├── layouts -- 路由布局页面(是否缓存页面)
+├ ├──	├── tabBar -- 底部菜单页面
+├ └──	└── orther -- 其他页面
 ├ ├── App.vue -- 根组件  
 ├ ├── main.ts -- 入口 ts  
 ├ ├── shims-axios.d.ts -- axios 声明文件  
