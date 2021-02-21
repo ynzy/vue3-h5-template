@@ -21,30 +21,30 @@
 > ├── src -- 源码目录  
 > ├ ├── api -- 后端交互的接口  
 > ├ ├── assets -- 静态资源目录
-> ├ ├── css
-> ├ ├── index.scss -- 全局通用样式
-> ├ ├── mixin.scss -- 全局 mixin
-> ├ └── variables.scss -- 全局变量  
+> ├ ├──├── css
+> ├ ├──├── index.scss -- 全局通用样式
+> ├ ├──├── mixin.scss -- 全局 mixin
+> ├ └──└── variables.scss -- 全局变量  
 > ├ ├── components -- 封装的组件  
 > ├ ├── config -- 环境配置  
 > ├ ├── hooks -- vue3 Hooks
 > ├ ├── model -- 类型声明文件
 > ├ ├── const -- 放 vue 页面的配置常量  
 > ├ ├── plugins -- 插件  
-> ├ └── route -- VUE 路由  
-> ├ ├── index -- 路由入口  
-> ├ └── router.config.js -- 路由表  
+> ├ ├── route -- VUE 路由  
+> ├ ├──├── index -- 路由入口  
+> ├ └──└── router.config.js -- 路由表  
 > ├ ├── store -- VUEX  
 > ├ └── utils -- 工具包  
-> ├ ├── request.js -- axios 封装
-> ├ └── storage.js -- 本地存储封装
+> ├ ├──├── request.js -- axios 封装
+> ├ └──└── storage.js -- 本地存储封装
 > ├ ├── views -- 业务上的 vue 页面  
-> ├ ├── layouts -- 路由布局页面(是否缓存页面)
-> ├ ├── tabBar -- 底部菜单页面
-> ├ └── orther -- 其他页面
+> ├ ├──├── layouts -- 路由布局页面(是否缓存页面)
+> ├ ├──├── tabBar -- 底部菜单页面
+> ├ └──└── orther -- 其他页面
 > ├ ├── App.vue -- 根组件  
-> ├ └── main.ts -- 入口 ts  
-> ├ └── shims-axios.d.ts -- axios 声明文件  
+> ├ ├── main.ts -- 入口 ts  
+> ├ ├── shims-axios.d.ts -- axios 声明文件  
 > ├ └── shims-vue.d.ts -- vue 组件声明文件
 > ├── .env.development -- 开发环境  
 > ├── .env.production -- 生产环境  

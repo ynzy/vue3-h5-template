@@ -17,12 +17,12 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/home/index.vue'),
         meta: { title: '首页', keepAlive: false, showTab: true }
       },
-      {
-        path: '/demo',
-        name: 'Dome',
-        component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/dome/index.vue'),
-        meta: { title: '案例', keepAlive: false, showTab: true }
-      },
+      // {
+      //   path: '/demo',
+      //   name: 'Dome',
+      //   component: () => import(/* webpackChunkName: "tabbar" */ '@/views/tabBar/dome/index.vue'),
+      //   meta: { title: '案例', keepAlive: false, showTab: true }
+      // },
       {
         path: '/about',
         name: 'About',
