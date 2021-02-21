@@ -70,7 +70,7 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .vc-tigger {
   position: fixed;
   top: 0;
@@ -82,5 +82,8 @@ export default defineComponent({
   font-size: 12px;
   color: #fff;
   background: rgb(0, 195, 255);
+}
+.vconsole_show {
+  display: block !important;
 }
 </style>

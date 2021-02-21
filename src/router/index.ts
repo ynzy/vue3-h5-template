@@ -3,6 +3,7 @@ import { constantRouterMap } from './router.config'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { phoneModel } from '@/utils'
 import store from '@/store'
+import { isWeChat } from '../utils/index'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -23,6 +24,9 @@ router.beforeEach((to, from, next) => {
   //! 解决ios微信下，分享签名不成功的问题,将第一次的进入的url缓存起来。
   if (window.entryUrl === undefined) {
     window.entryUrl = location.href.split('#')[0]
+  }
+  // 微信浏览器内微信授权登陆
+  if (isWeChat()) {
   }
   next()
 })
