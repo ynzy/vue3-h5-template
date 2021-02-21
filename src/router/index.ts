@@ -31,7 +31,6 @@ router.beforeEach((to, from, next) => {
     window.entryUrl = location.href.split('#')[0]
   }
   const { code } = getQueryParams<IQueryParams>()
-  console.log('code', code)
   // 微信浏览器内微信授权登陆
   // && !store.state.auth.userInfo.name
   if (isWeChat()) {
