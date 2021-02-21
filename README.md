@@ -2,9 +2,9 @@
 
 基于 Vue3+TypeScript+ Vue-Cli4.0 + vant ui + sass+ rem 适配方案+axios 封装 + jssdk 配置 + vconsole 移动端调试，构建手机端模板脚手架
 
-项目地址：[github](https://github.com/ynzy/vue3-h5-template)
-掘金地址：[掘金](https://juejin.cn/post/6931630327211229198)
-简书地址：[简书](https://www.jianshu.com/p/adb0983830f6)
+* 项目地址：[github](https://github.com/ynzy/vue3-h5-template)
+* 掘金地址：[掘金](https://juejin.cn/post/6931630327211229198)
+* 简书地址：[简书](https://www.jianshu.com/p/adb0983830f6)
 
 [查看 demo](https://vue3-h5-template.vercel.app/) 建议手机端查看
 
