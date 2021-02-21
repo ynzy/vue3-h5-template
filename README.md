@@ -15,6 +15,50 @@
 ### 项目结构
 
 > vue-h5-template -- UI 主目录  
+> |-- public -- 静态资源  
+> |		|-- favicon.ico -- 图标  
+> |		|-- index.html -- 首页  
+> |-- src -- 源码目录  
+> |		|-- api -- 后端交互的接口  
+> |-- assets -- 静态资源目录
+> |		|-- css
+> |		|		|-- index.scss -- 全局通用样式
+> |		|		|-- mixin.scss -- 全局 mixin
+> |		|		|-- variables.scss -- 全局变量  
+> |--	components -- 封装的组件  
+> |--	config -- 环境配置  
+> |--	hooks -- vue3 Hooks
+> |--	model -- 类型声明文件
+> |--	const -- 放 vue 页面的配置常量  
+> |--	plugins -- 插件  
+> |--	route -- VUE 路由  
+> |		|-- index -- 路由入口  
+> |		|-- router.config.js -- 路由表  
+> |--	store -- VUEX  
+> |--	utils -- 工具包  
+> |		|--	request.js -- axios 封装
+> |		|--	storage.js -- 本地存储封装
+> |-- views -- 业务上的 vue 页面  
+> |		|-- layouts -- 路由布局页面(是否缓存页面)
+> |		|-- tabBar -- 底部菜单页面
+> |		|-- orther -- 其他页面
+> |--	App.vue -- 根组件  
+> |--	main.ts -- 入口 ts  
+> |--	shims-axios.d.ts -- axios 声明文件  
+> |--	shims-vue.d.ts -- vue 组件声明文件
+> |--	.env.development -- 开发环境  
+> |--	.env.production -- 生产环境  
+> |--	.env.staging -- 测试环境  
+> |--	.eslintrc.js -- ESLint 配置  
+> |--	.gitignore -- git 忽略  
+> |--	.postcssrc.js -- CSS 预处理配置(rem 适配)  
+> |--	babel.config.js -- barbel 配置入口  
+> |--	tsconfig.json -- vscode 路径引入配置
+> |--	package.json -- 依赖管理  
+> |--	vue.config.js -- vue cli4 的 webpack 配置
+### 项目结构
+
+> vue-h5-template -- UI 主目录  
 > ├── public -- 静态资源  
 > ├ ├── favicon.ico -- 图标  
 > ├ └── index.html -- 首页  
@@ -71,29 +115,29 @@ npm run serve
 ```
 
 ## <span id="top">目录</span>
-* [配置多环境变量](#env)
-* [rem 适配方案](#rem)
-* [VantUI 组件按需加载](#vant)
-* [Sass 全局样式](#sass)
-* [适配苹果底部安全距离](#phonex)
-* [使用 Mock 数据](#mock)
-* [Axios 封装及接口管理](#axios)
-* [Vuex 状态管理](#vuex)
-* [Vue-router](#router)
-* [Webpack 4 vue.config.js 基础配置](#base)
-* [配置 alias 别名](#alias)
-* [配置 proxy 跨域](#proxy)
-* [配置 打包分析](#bundle)
-* [externals 引入 cdn 资源](#externals)
-* [去掉 console.log](#console)
-* [splitChunks 单独打包第三方模块](#chunks)
-* [gzip 压缩](#gzip)
-* [uglifyjs 压缩](#uglifyjs)
-* [vconsole 移动端调试](#vconsole)
-* [动态设置 title](#dyntitle)
-* [本地存储 storage 封装](#storage)
-* [配置 Jssdk](#jssdk)
-* [Eslint + Pettier 统一开发规范](#pettier)
+* [√配置多环境变量](#env)
+* [√rem 适配方案](#rem)
+* [√VantUI 组件按需加载](#vant)
+* [√Sass 全局样式](#sass)
+* [√适配苹果底部安全距离](#phonex)
+* [√使用 Mock 数据](#mock)
+* [√Axios 封装及接口管理](#axios)
+* [√Vuex 状态管理](#vuex)
+* [√Vue-router](#router)
+* [√Webpack 4 vue.config.js 基础配置](#base)
+* [√配置 alias 别名](#alias)
+* [√配置 proxy 跨域](#proxy)
+* [√配置 打包分析](#bundle)
+* [√externals 引入 cdn 资源](#externals)
+* [√去掉 console.log](#console)
+* [√splitChunks 单独打包第三方模块](#chunks)
+* [√gzip 压缩](#gzip)
+* [√uglifyjs 压缩](#uglifyjs)
+* [√vconsole 移动端调试](#vconsole)
+* [√动态设置 title](#dyntitle)
+* [√本地存储 storage 封装](#storage)
+* [√配置 Jssdk](#jssdk)
+* [√Eslint + Pettier 统一开发规范](#pettier)
 
 ### <span id="env">✅ 配置多环境变量 </span>
 
