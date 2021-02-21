@@ -16,6 +16,7 @@ module.exports = {
   devServer: {
     port: 9020, // 端口
     open: false, // 启动后打开浏览器
+    disableHostCheck: true, // 绕过主机检查，解决Invalid Host header问题
     overlay: {
       //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
       warnings: false,

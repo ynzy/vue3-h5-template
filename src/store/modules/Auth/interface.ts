@@ -5,4 +5,6 @@ import { IUserInfo } from '@/api/interface'
  */
 export interface IAuthState {
   userInfo: IUserInfo
+  isAuth: boolean
+  code: string
 }

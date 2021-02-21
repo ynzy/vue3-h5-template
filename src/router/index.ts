@@ -1,9 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { constantRouterMap } from './router.config'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
-import { phoneModel } from '@/utils'
+import { getQueryParams, phoneModel } from '@/utils'
 import store from '@/store'
 import { isWeChat } from '../utils/index'
+import { fetchWeChatAuth } from '@/api/WxController'
+
+interface IQueryParams {
+  code?: string
+}
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -25,9 +30,20 @@ router.beforeEach((to, from, next) => {
   if (window.entryUrl === undefined) {
     window.entryUrl = location.href.split('#')[0]
   }
+  const { code } = getQueryParams<IQueryParams>()
+  console.log('code', code)
   // 微信浏览器内微信授权登陆
+  // && !store.state.auth.userInfo.name
   if (isWeChat()) {
+    if (!store.state.auth.isAuth) {
+      location.href = fetchWeChatAuth()
+    }
+    if (code) {
+      store.commit('auth/STE_ISAUTH', true)
+      store.commit('auth/STE_CODE', code)
+    }
   }
+
   next()
 })
 

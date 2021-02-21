@@ -7,7 +7,7 @@ import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { Dialog, Toast } from 'vant'
 import router from '@/router'
 // 根据环境不同引入不同api地址
-import config from '@/config'
+import { config } from '@/config'
 
 const service = axios.create({
   baseURL: config.baseApi + '/vue-h5', // url = base url + request url

@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent, onUnmounted, reactive } from 'vue'
 import VConsole from 'vconsole'
-import config from '@/config'
+import { config } from '@/config'
 import { useDOMCreate } from '@/hooks/useDOMCreate'
 interface IState {
   lastClickTime: number

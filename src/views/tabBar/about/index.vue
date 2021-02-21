@@ -7,6 +7,10 @@
       <van-image width="100" height="100" round src="https://img01.yzcdn.cn/vant/cat.jpeg" />
     </div>
     <div class="item author">项目作者：{{ userInfo.author }}</div>
+    <div class="item author">
+      <p class="label">微信授权code码:</p>
+      <p>{{ code }}</p>
+    </div>
     <div class="item url" @click="jumpUrl">
       <p class="label">项目地址:</p>
       <p>{{ userInfo.projectAddress }}</p>
@@ -28,6 +32,9 @@ export default defineComponent({
     const userInfo = computed(() => {
       return store.state.auth.userInfo
     })
+    const code = computed(() => {
+      return store.state.auth.code || '请使用微信浏览器查看'
+    })
     const jumpUrl = () => {
       window.location.href = `${userInfo.value.projectAddress}`
     }
@@ -42,7 +49,8 @@ export default defineComponent({
     })
     return {
       userInfo,
-      jumpUrl
+      jumpUrl,
+      code
     }
   }
 })
@@ -50,9 +58,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .about_container {
   height: 100vh;
-  @include flexbox(center, center, column);
+  @include flexbox(flex-start, center, column);
   .item {
     margin: 15px 0;
+    text-align: center;
   }
   .author {
     font-size: 16px;
