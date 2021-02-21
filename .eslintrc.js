@@ -17,6 +17,7 @@ module.exports = {
   },
   rules: {
     // 禁止使用 var
+    'no-empty': 'off',
     'no-var': 'error',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
