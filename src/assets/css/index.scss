@@ -1,0 +1,53 @@
+@import './reset.scss';
+@import './variables.scss';
+@import './mixin.scss';
+
+html,
+body,
+#app {
+  height: 100%;
+  color: #333333;
+  font-family: Arial, Helvetica, 'STHeiti STXihei', 'Microsoft YaHei', Tohoma, sans-serif;
+  background-color: $background-color;
+}
+
+.app-container {
+  padding-bottom: 50px;
+}
+
+#__vconsole {
+  display: none;
+}
+
+.fixIphonex {
+  padding-bottom: $safe-bottom !important;
+  &::after {
+    content: '';
+    position: fixed;
+    bottom: 0 !important;
+    left: 0;
+    height: calc(#{$safe-bottom} + 1px);
+    width: 100%;
+    background: #ffffff;
+  }
+}
+
+/* 适配iphonex */
+
+@supports (bottom: env(safe-area-inset-bottom)) {
+  .app-container {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 50px); // 这里是重点
+  }
+  .bottom-button-box {
+    bottom: env(safe-area-inset-bottom); // 这里是重点
+    &:after {
+      content: '';
+      height: env(safe-area-inset-bottom); // 这里是重点
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+    }
+  }
+}
